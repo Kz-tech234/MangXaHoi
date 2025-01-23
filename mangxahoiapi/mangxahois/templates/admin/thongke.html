@@ -1,0 +1,28 @@
+{% extends 'admin/base_site.html' %}
+{% block content %}
+    <h1>Thống kê hoạt động mạng xã hội cựu sinh viên</h1>
+
+    <div>
+        <p>Tổng số người dùng: {{ user_count }}</p>
+        <p>Tổng số bài viết: {{ baiViet_count }}</p>
+    </div>
+
+    <canvas id="statsChart"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('statsChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Người dùng', 'Bài viết'],
+                datasets: [{
+                    label: 'Thống kê số lượng',
+                    data: [{{ user_count }}, {{ baiViet_count }}],
+                    backgroundColor: ['blue', 'green'],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
+{% endblock %}
